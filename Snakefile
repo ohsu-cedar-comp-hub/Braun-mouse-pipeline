@@ -26,10 +26,8 @@ insertion_and_clipping_prof_ext = ['r','R1.pdf','R2.pdf','xls']
 inner_distance_ext = ['_freq.txt','_plot.pdf','_plot.r','.txt']
 read_dist_ext = ['txt']
 read_gc_ext = ['.xls','_plot.r','_plot.pdf']
-circ_ext=['circrna/circularRNA_known.txt']
 fastqscreen_ext = ['html','png','txt']
 
-# TODO generate initializing rule to automatically generate log out for all rules
 
 with open('cluster.json') as json_file:
     json_dict = json.load(json_file)
@@ -42,6 +40,7 @@ for rule in rule_dirs:
         log_out = os.path.join(os.getcwd(), 'logs', rule)
         os.makedirs(log_out)
         print(log_out)
+
 
 result_dirs = ['diffexp','tables']
 for rule in result_dirs:
@@ -94,7 +93,6 @@ rule all:
         expand(["results/diffexp/GOterms/{contrast}.diffexp.downFC.1.adjp.0.05_BP_GO.txt", "results/diffexp/GOterms/{contrast}.diffexp.upFC.1.adjp.0.05_BP_GO.txt"], contrast = config["diffexp"]["contrasts"]), 
         expand("results/diffexp/{project_id}_all.rds",project_id = config['project_id']),
         expand(["results/diffexp/{contrast}.diffexp.tsv", "results/diffexp/{contrast}.ma_plot.pdf","results/diffexp/{contrast}.phist_plot.pdf"],contrast = config["diffexp"]["contrasts"]),
-        expand("samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam.bai",sample=SAMPLES),
 #        expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html","results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
 #        "results/diffexp/glimma-plots/{project_id}.ma_plot.html".format(project_id=project_id),
 
@@ -102,4 +100,3 @@ rule all:
 include: "rules/align_rmdp.smk"
 include: "rules/omic_qc.smk"
 include: "rules/deseq.smk"
-include: "rules/miso.smk"

@@ -58,15 +58,6 @@ assembly:
 dds_design:
   SampleID
 
-const_exons:
-  /home/groups/CEDAR/estabroj/annotations/gff3/exons/ensGene.min_1000.const_exons.gff
-
-events:
-  /home/groups/CEDAR/estabroj/annotations/gff3/mm10/SE_indexed
-
-read_length:
-  100
-
 meta_columns_to_plot:
   Time: Time
   Condition: Condition
