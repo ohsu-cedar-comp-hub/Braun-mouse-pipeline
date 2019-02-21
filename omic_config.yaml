@@ -1,0 +1,112 @@
+bb_adapter:
+  /home/exacloud/lustre1/CompBio/estabroj/data/snakemake/projects/beta4/data/adapters.fa
+
+bed_file:
+  /home/groups/CEDAR/estabroj/beta4/data/mm10_MGC_gene.bed
+
+star_tool:
+  /home/groups/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+
+picard_tool:
+  /home/groups/CEDAR/tools/picard-tools-1.119/MarkDuplicates.jar
+
+bowtie2_tool:
+  /home/exacloud/lustre1/CEDAR/tools/bowtie2-2.3.4.1/bowtie2
+
+adapter-PE:
+  /home/users/estabroj/scratch/data/snakemake/projects/beta4/data/TruSeq3-PE-2.fa
+
+conf:
+  /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
+
+refflat2:
+  /home/exacloud/lustre1/CEDAR/Genomes/gencode27_refflat2.txt
+
+star_index:
+  /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
+
+project_id:
+  Pre-malignant-PanIN-evolution
+
+base_dir:
+  /home/groups/CEDAR/estabroj/beta4
+
+omic_meta_data:
+  /home/groups/CEDAR/estabroj/beta4/data/beta4_meta_data.txt
+
+samples:
+  /home/groups/CEDAR/estabroj/beta4/data/beta4_meta_data.txt
+
+gtf_file:
+  /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2015-07-17-14-33-26/Genes/genes.gtf
+
+seq_layout:
+  PE
+
+baseline:
+  38-KC
+
+linear_model:
+  Condition
+
+sample_id:
+  SampleID
+
+assembly:
+  mm10
+
+dds_design:
+  SampleID
+
+const_exons:
+  /home/groups/CEDAR/estabroj/annotations/gff3/exons/ensGene.min_1000.const_exons.gff
+
+events:
+  /home/groups/CEDAR/estabroj/annotations/gff3/mm10/SE_indexed
+
+read_length:
+  100
+
+meta_columns_to_plot:
+  Time: Time
+  Condition: Condition
+  Lane: Lane
+
+pca:
+  labels:
+    # columns of sample sheet to use for PCA
+    - Condition
+
+diffexp:
+  # contrasts for the deseq2 results method
+  contrasts:
+    38-KC-B4-vs-38-wt:
+      - 38-KC-B4
+      - 38-wt
+    38-KC-vs-38-wt:
+      - 38-KC
+      - 38-wt
+    60-KC-B4-vs-38-wt:
+      - 60-KC-B4
+      - 38-wt
+    60-KC-vs-38-wt:
+      - 60-KC
+      - 38-wt
+    38-KC-vs-38-KC-B4:
+      - 38-KC-B4
+      - 38-KC
+    60-KC-B4-vs-38-KC-B4:
+      - 60-KC-B4
+      - 38-KC-B4
+    60-KC-vs-38-KC-B4:
+      - 60-KC
+      - 38-KC-B4
+    60-KC-B4-vs-38-KC:
+      - 60-KC-B4
+      - 38-KC
+    60-KC-vs-38-KC:
+      - 60-KC
+      - 38-KC
+    60-KC-vs-60-KC-B4:
+      - 60-KC-B4
+      - 60-KC
