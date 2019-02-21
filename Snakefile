@@ -93,8 +93,8 @@ rule all:
         expand(["results/diffexp/GOterms/{contrast}.diffexp.downFC.1.adjp.0.05_BP_GO.txt", "results/diffexp/GOterms/{contrast}.diffexp.upFC.1.adjp.0.05_BP_GO.txt"], contrast = config["diffexp"]["contrasts"]), 
         expand("results/diffexp/{project_id}_all.rds",project_id = config['project_id']),
         expand(["results/diffexp/{contrast}.diffexp.tsv", "results/diffexp/{contrast}.ma_plot.pdf","results/diffexp/{contrast}.phist_plot.pdf"],contrast = config["diffexp"]["contrasts"]),
-#        expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html","results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
-#        "results/diffexp/glimma-plots/{project_id}.ma_plot.html".format(project_id=project_id),
+        expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html","results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
+        "results/diffexp/glimma-plots/{project_id}.ma_plot.html".format(project_id=project_id),
 
 
 include: "rules/align_rmdp.smk"

@@ -6,7 +6,7 @@ rule deseq2_init:
         normed_counts="results/tables/{project_id}_normed_counts.txt".format(project_id = project_id),
         rld_out = "results/diffexp/{project_id}_rlog_dds.rds".format(project_id = project_id),
     params:
-        samples=config["samples"],
+        samples=config["omic_meta_data"],
         design=config["pca"]["labels"],
         row_names=config["sample_id"],
     conda:
@@ -86,7 +86,7 @@ rule run_glimma_mds:
     input:
         rds="results/diffexp/{project_id}_all.rds".format(project_id=config["project_id"])
     output:
-        mds_plot = "results/diffexp/glimma-plots/{project_id}.ma_plot.html".format(project_id=project_id),
+        mds_plot = "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id),
     params:
         project_id = config["project_id"],
     conda:

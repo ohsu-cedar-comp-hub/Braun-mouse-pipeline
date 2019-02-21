@@ -7,12 +7,6 @@ bed_file:
 star_tool:
   /home/groups/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
 
-picard_tool:
-  /home/groups/CEDAR/tools/picard-tools-1.119/MarkDuplicates.jar
-
-bowtie2_tool:
-  /home/exacloud/lustre1/CEDAR/tools/bowtie2-2.3.4.1/bowtie2
-
 adapter-PE:
   /home/users/estabroj/scratch/data/snakemake/projects/beta4/data/TruSeq3-PE-2.fa
 
@@ -26,37 +20,37 @@ star_index:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
 
 project_id:
-  Pre-malignant-PanIN-evolution
+  name-of-project
 
 base_dir:
-  /home/groups/CEDAR/estabroj/beta4
+  /path/to/base/project/directory/
 
 omic_meta_data:
-  /home/groups/CEDAR/estabroj/beta4/data/beta4_meta_data.txt
-
-samples:
+  #Path to metadata file
   /home/groups/CEDAR/estabroj/beta4/data/beta4_meta_data.txt
 
 gtf_file:
+  #Directory of gtf used to compile star index and annotate features
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2015-07-17-14-33-26/Genes/genes.gtf
 
 seq_layout:
+  # type of data paired-end | single-end : PE | SE
   PE
 
 baseline:
+  #Baseline for linear model - needs to be a factor in column listed for : linear_model 
   38-KC
 
 linear_model:
+  #Column name in meta data file to generate contrasts by
   Condition
 
 sample_id:
+  #Column name listing unique sample ids to be used. This needs to be the first column in the meta data file 
   SampleID
 
 assembly:
   mm10
-
-dds_design:
-  SampleID
 
 meta_columns_to_plot:
   Time: Time
@@ -65,39 +59,15 @@ meta_columns_to_plot:
 
 pca:
   labels:
-    # columns of sample sheet to use for PCA
+    # columns of sample sheet to use for PCA and DE analysis
     - Condition
 
 diffexp:
-  # contrasts for the deseq2 results method
+  # contrasts for the deseq2 results method - uses column indicated by pca[labels] above.  
   contrasts:
+    #Name of contrast experiment
     38-KC-B4-vs-38-wt:
+      # factor level of treatment or contrast group
       - 38-KC-B4
+      # factor level of baseline of control group
       - 38-wt
-    38-KC-vs-38-wt:
-      - 38-KC
-      - 38-wt
-    60-KC-B4-vs-38-wt:
-      - 60-KC-B4
-      - 38-wt
-    60-KC-vs-38-wt:
-      - 60-KC
-      - 38-wt
-    38-KC-vs-38-KC-B4:
-      - 38-KC-B4
-      - 38-KC
-    60-KC-B4-vs-38-KC-B4:
-      - 60-KC-B4
-      - 38-KC-B4
-    60-KC-vs-38-KC-B4:
-      - 60-KC
-      - 38-KC-B4
-    60-KC-B4-vs-38-KC:
-      - 60-KC-B4
-      - 38-KC
-    60-KC-vs-38-KC:
-      - 60-KC
-      - 38-KC
-    60-KC-vs-60-KC-B4:
-      - 60-KC-B4
-      - 60-KC
