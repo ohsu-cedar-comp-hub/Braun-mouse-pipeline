@@ -62,7 +62,7 @@ def format_plot_columns():
 
 def get_deseq2_threads(wildcards=None):
     few_coeffs = False if wildcards is None else len(get_contrast(wildcards)) < 10
-    return 1 if len(config["samples"]) < 100 or few_coeffs else 6
+    return 1 if len(config["omic_meta_data"]) < 100 or few_coeffs else 6
 
 
 def get_contrast(wildcards):
