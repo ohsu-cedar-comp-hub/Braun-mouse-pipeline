@@ -20,14 +20,14 @@ star_index:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
 
 project_id:
-  name-of-project
+  test_run  
 
 base_dir:
-  /path/to/base/project/directory/
+  /home/groups/MaxsonLab/braun/Braun-mouse-pipeline
 
 omic_meta_data:
   #Path to metadata file
-  /home/groups/CEDAR/estabroj/beta4/data/beta4_meta_data.txt
+  /home/groups/MaxsonLab/input-data/BGILSD1i/metadata/LSD1metadata.txt
 
 gtf_file:
   #Directory of gtf used to compile star index and annotate features
@@ -39,7 +39,7 @@ seq_layout:
 
 baseline:
   #Baseline for linear model - needs to be a factor in column listed for : linear_model 
-  38-KC
+  ND
 
 linear_model:
   #Column name in meta data file to generate contrasts by
@@ -53,9 +53,7 @@ assembly:
   mm10
 
 meta_columns_to_plot:
-  Time: Time
   Condition: Condition
-  Lane: Lane
 
 pca:
   labels:
@@ -66,8 +64,9 @@ diffexp:
   # contrasts for the deseq2 results method - uses column indicated by pca[labels] above.  
   contrasts:
     #Name of contrast experiment
-    38-KC-B4-vs-38-wt:
+    GSK-vs-ND:
+    #LSD1i:
       # factor level of treatment or contrast group
-      - 38-KC-B4
+      - GSK
       # factor level of baseline of control group
-      - 38-wt
+      - ND

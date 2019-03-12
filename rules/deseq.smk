@@ -75,7 +75,7 @@ rule run_glimma:
         ma_plot = "results/diffexp/glimma-plots/{contrast}.ma_plot.html",
         volcano_plot = "results/diffexp/glimma-plots/{contrast}.volcano_plot.html",
     params:
-        contrast = get_contrast,
+        contrast = get_glimma_contrast,
         condition = config["linear_model"],
     conda:
         "../envs/glimma_env.yaml"

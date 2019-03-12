@@ -69,6 +69,8 @@ def get_contrast(wildcards):
     """Return each contrast provided in the configuration file"""
     return config["diffexp"]["contrasts"][wildcards.contrast]
 
+def get_glimma_contrast(wildcards):
+    return config["diffexp"]["contrasts"][wildcards.contrast]
 
 for sample in SAMPLES:
     message("Sample " + sample + " will be processed")
@@ -80,7 +82,7 @@ rule all:
         expand("samples/star/{sample}_bam/ReadsPerGene.out.tab", sample = SAMPLES),
         expand("samples/star/{sample}_bam/Log.final.out",sample=SAMPLES),
         expand("results/tables/{project_id}_STAR_mapping_statistics.txt", project_id = config['project_id']),
-        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t.good_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
+        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
         expand("samples/fastqscreen/{sample}/{sample}_{fastq_ext}_t.good_screen.{fastqscreen_ext}", sample=SAMPLES, fastq_ext=fastq_ext, fastqscreen_ext=fastqscreen_ext),
         "data/{project_id}_counts.txt".format(project_id=config['project_id']),
         expand("rseqc/insertion_profile/{sample}/{sample}.insertion_profile.{ext}",sample=SAMPLES, ext=insertion_and_clipping_prof_ext),
@@ -94,7 +96,7 @@ rule all:
         expand("results/diffexp/{project_id}_all.rds",project_id = config['project_id']),
         expand(["results/diffexp/{contrast}.diffexp.tsv", "results/diffexp/{contrast}.ma_plot.pdf","results/diffexp/{contrast}.phist_plot.pdf"],contrast = config["diffexp"]["contrasts"]),
         expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html","results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
-        "results/diffexp/glimma-plots/{project_id}.ma_plot.html".format(project_id=project_id),
+        "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id)
 
 
 include: "rules/align_rmdp.smk"
