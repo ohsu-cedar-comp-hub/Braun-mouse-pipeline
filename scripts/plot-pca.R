@@ -68,7 +68,7 @@ df <- as.data.frame(colData(rld))
 
 pdf(heatmap_plot)
 pheatmap(assay(rld)[topGenes,], cluster_rows=T, fontsize=6,fontsize_row=6,fontsize_col=6,show_rownames=T,
-         cluster_cols=T, annotation_col=df[,subset_cols],labels_col=as.character(df$SampleID))
+         cluster_cols=T, annotation_col=df[,subset_cols,drop=FALSE],labels_col=as.character(df$SampleID))
 dev.off()
 
 # Heatmap of distances
@@ -94,7 +94,7 @@ pcaData <- plotPCA(rld, intgroup=c(labels), returnData=TRUE)
 pdf(ggplot_pca_factor)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 # TODO allow for dynamic color and shape naming conventions
-g<-ggplot(pcaData, aes_string('PC1', 'PC2', color=Labels)) +
+g<-ggplot(pcaData, aes_string('PC1', 'PC2', color=labels)) +
   geom_point(size=3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
@@ -124,5 +124,5 @@ topVarGenes <- head(order(rowVars(assay(rld)), decreasing = TRUE), 20)
 mat  <- assay(rld)[ topVarGenes, ]
 mat  <- mat - rowMeans(mat)
 anno <- as.data.frame(colData(rld))
-pheatmap(mat, annotation_col = anno[,subset_cols],fontsize=6,)
+pheatmap(mat, annotation_col = anno[,subset_cols,drop=FALSE],fontsize=6,)
 dev.off()

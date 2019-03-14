@@ -28,7 +28,7 @@ if (snakemake@threads > 1) {
 cts <- read.table(counts, header=TRUE, row.names=1, sep="\t", check.names=F)
 coldata <- read.table(params, header=TRUE, row.names=1, sep="\t")
 
-coldata <- coldata[colnames(cts),]
+coldata <- coldata[colnames(cts),,drop=FALSE]
 cts <- cts[, rownames(coldata)]
 
 dds <- DESeqDataSetFromMatrix(countData=cts,

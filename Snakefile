@@ -33,7 +33,6 @@ with open('cluster.json') as json_file:
     json_dict = json.load(json_file)
 
 rule_dirs = list(json_dict.keys())
-rule_dirs.pop(rule_dirs.index('__default__'))
 
 for rule in rule_dirs:
     if not os.path.exists(os.path.join(os.getcwd(),'logs',rule)):
@@ -82,7 +81,7 @@ rule all:
         expand("samples/star/{sample}_bam/ReadsPerGene.out.tab", sample = SAMPLES),
         expand("samples/star/{sample}_bam/Log.final.out",sample=SAMPLES),
         expand("results/tables/{project_id}_STAR_mapping_statistics.txt", project_id = config['project_id']),
-        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
+        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t.good_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
         expand("samples/fastqscreen/{sample}/{sample}_{fastq_ext}_t.good_screen.{fastqscreen_ext}", sample=SAMPLES, fastq_ext=fastq_ext, fastqscreen_ext=fastqscreen_ext),
         "data/{project_id}_counts.txt".format(project_id=config['project_id']),
         expand("rseqc/insertion_profile/{sample}/{sample}.insertion_profile.{ext}",sample=SAMPLES, ext=insertion_and_clipping_prof_ext),

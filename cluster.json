@@ -5,8 +5,8 @@
         "N" : 1,
         "partition" : "exacloud",
         "J" : "{rule}.%j",
-        "o" : "logs/{rule}/%j_{rule}.out",
-        "e" : "logs/{rule}/%j_{rule}.err",
+        "o" : "logs/__default__/{rule}_%j.out",
+        "e" : "logs/__default__/{rule}_%j.err",
         "c" : 1,
         "mem" : 50000
     },
@@ -36,11 +36,11 @@
         "t" : "35:00:00",
         "mem" : 10000
     },
-    "trimming" :
+    "trim_bbduk" :
     {
-        "J" : "trimming",
-        "e" : "logs/trimming/trimming_%j_{rule}.err",
-        "o" : "logs/trimming/trimming_%j_{rule}.out",
+        "J" : "trim_bbduk",
+        "e" : "logs/trim_bbduk/{wildcards.sample}_%j.err",
+        "o" : "logs/trim_bbduk/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
@@ -117,9 +117,9 @@
     },
     "STAR" :
     {
-        "J" : "star",
-        "e" : "logs/star/star%j_{rule}.err",
-        "o" : "logs/star/star%j_{rule}.out",
+        "J" : "STAR",
+        "e" : "logs/STAR/{rule}_%j.err",
+        "o" : "logs/STAR/{rule}_%j.out",
         "c" : 12,
         "mem" : 64000
     },
