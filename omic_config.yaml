@@ -23,11 +23,11 @@ project_id:
   test_run  
 
 base_dir:
-  /home/groups/MaxsonLab/braun/Braun-mouse-pipeline
+  /home/users/estabroj/cedar_rds/experiments/Braun-mouse-pipeline
 
 omic_meta_data:
   #Path to metadata file
-  /home/groups/MaxsonLab/input-data/BGILSD1i/metadata/LSD1metadata.txt
+  /home/groups/CEDAR/estabroj/experiments/Braun-mouse-pipeline/data/LSD1metadata.txt
 
 gtf_file:
   #Directory of gtf used to compile star index and annotate features

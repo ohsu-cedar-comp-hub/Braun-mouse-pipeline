@@ -80,7 +80,7 @@ for sample in SAMPLES:
 rule all:
     input:
         expand("results/tables/{project_id}_STAR_mapping_statistics.txt", project_id = config['project_id']),
-        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
+        expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t.good_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
         expand("samples/fastqscreen/{sample}/{sample}_{fastq_ext}_t.good_screen.{fastqscreen_ext}", sample=SAMPLES, fastq_ext=fastq_ext, fastqscreen_ext=fastqscreen_ext),
         expand("samples/samtools_stats/{sample}.txt",sample=SAMPLES),
         expand("rseqc/insertion_profile/{sample}/{sample}.insertion_profile.{ext}",sample=SAMPLES, ext=insertion_and_clipping_prof_ext),

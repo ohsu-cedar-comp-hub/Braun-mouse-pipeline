@@ -58,8 +58,8 @@ rule fastqc:
         fwd = "samples/bbduk/{sample}/good/{sample}_R1_t.good.fq.gz",
         rev = "samples/bbduk/{sample}/good/{sample}_R2_t.good.fq.gz"
     output:
-        fwd = "samples/fastqc/{sample}/{sample}_R1_t_fastqc.zip",
-        rev = "samples/fastqc/{sample}/{sample}_R2_t_fastqc.zip"
+        fwd = "samples/fastqc/{sample}/{sample}_R1_t.good_fastqc.zip",
+        rev = "samples/fastqc/{sample}/{sample}_R2_t.good_fastqc.zip"
     conda:
         "../envs/fastqc.yaml"
     message:
