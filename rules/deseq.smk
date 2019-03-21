@@ -46,7 +46,7 @@ rule deseq2:
         contrast=get_contrast,
         condition = config["linear_model"]
     conda:
-        "../envs/deseq2.yaml"
+        "../envs/deseq2_plots.yaml"
     threads: get_deseq2_threads()
     script:
         "../scripts/deseq2.R"
