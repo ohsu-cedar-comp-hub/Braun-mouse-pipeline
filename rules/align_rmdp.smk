@@ -7,6 +7,8 @@ rule trim_bbduk:
         rev = "samples/bbduk/{sample}/{sample}_R2_t.fastq.gz",
     params:
         ref=config["bb_adapter"]
+    conda:
+        "../envs/bbmap.yaml"
     message:
         """--- Trimming."""
     shell:

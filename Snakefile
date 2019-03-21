@@ -33,7 +33,6 @@ with open('cluster.json') as json_file:
     json_dict = json.load(json_file)
 
 rule_dirs = list(json_dict.keys())
-rule_dirs.pop(rule_dirs.index('__default__'))
 
 for rule in rule_dirs:
     if not os.path.exists(os.path.join(os.getcwd(),'logs',rule)):
@@ -69,8 +68,10 @@ def get_contrast(wildcards):
     """Return each contrast provided in the configuration file"""
     return config["diffexp"]["contrasts"][wildcards.contrast]
 
+
 def get_glimma_contrast(wildcards):
     return config["diffexp"]["contrasts"][wildcards.contrast]
+
 
 for sample in SAMPLES:
     message("Sample " + sample + " will be processed")
@@ -78,25 +79,23 @@ for sample in SAMPLES:
 
 rule all:
     input:
-        expand("samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam", sample = SAMPLES),
-        expand("samples/star/{sample}_bam/ReadsPerGene.out.tab", sample = SAMPLES),
-        expand("samples/star/{sample}_bam/Log.final.out",sample=SAMPLES),
         expand("results/tables/{project_id}_STAR_mapping_statistics.txt", project_id = config['project_id']),
         expand("samples/fastqc/{sample}/{sample}_{fastq_ext}_t_fastqc.zip", sample = SAMPLES, fastq_ext = fastq_ext),
         expand("samples/fastqscreen/{sample}/{sample}_{fastq_ext}_t.good_screen.{fastqscreen_ext}", sample=SAMPLES, fastq_ext=fastq_ext, fastqscreen_ext=fastqscreen_ext),
-        "data/{project_id}_counts.txt".format(project_id=config['project_id']),
+        expand("samples/samtools_stats/{sample}.txt",sample=SAMPLES),
         expand("rseqc/insertion_profile/{sample}/{sample}.insertion_profile.{ext}",sample=SAMPLES, ext=insertion_and_clipping_prof_ext),
         expand("rseqc/inner_distance/{sample}/{sample}.inner_distance{ext}", sample = SAMPLES, ext = inner_distance_ext),
         expand("rseqc/clipping_profile/{sample}/{sample}.clipping_profile.{ext}", sample = SAMPLES, ext = insertion_and_clipping_prof_ext),
         expand("rseqc/read_distribution/{sample}/{sample}.read_distribution.{ext}", sample = SAMPLES, ext = read_dist_ext),
         expand("rseqc/read_GC/{sample}/{sample}.GC{ext}", sample = SAMPLES, ext = read_gc_ext),
+        expand("samples/samtools_stats/{sample}.txt",sample=SAMPLES),
+        "data/{project_id}_coverage.txt".format(project_id=config["project_id"]),
         "results/tables/{}_Normed_with_Ratio_and_Abundance.txt".format(config['project_id']),
         "results/diffexp/pca.pdf",
-        expand(["results/diffexp/GOterms/{contrast}.diffexp.downFC.1.adjp.0.05_BP_GO.txt", "results/diffexp/GOterms/{contrast}.diffexp.upFC.1.adjp.0.05_BP_GO.txt"], contrast = config["diffexp"]["contrasts"]), 
-        expand("results/diffexp/{project_id}_all.rds",project_id = config['project_id']),
-        expand(["results/diffexp/{contrast}.diffexp.tsv", "results/diffexp/{contrast}.ma_plot.pdf","results/diffexp/{contrast}.phist_plot.pdf"],contrast = config["diffexp"]["contrasts"]),
+        expand(["results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_GO.txt", "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_GO.txt", "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01.BP.pdf", "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01.BP.pdf","results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_classic_5_all.pdf","results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_classic_5_all.pdf"], contrast = config["diffexp"]["contrasts"]),
+        expand("results/diffexp/{contrast}.diffexp.01.VolcanoPlot.pdf", contrast = config["diffexp"]["contrasts"]),
         expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html","results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
-        "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id)
+        "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id),
 
 
 include: "rules/align_rmdp.smk"

@@ -4,249 +4,223 @@
         "t" : "35:00:00",
         "N" : 1,
         "partition" : "exacloud",
-        "J" : "{rule}.%j",
-        "o" : "logs/{rule}/%j_{rule}.out",
-        "e" : "logs/{rule}/%j_{rule}.err",
-        "c" : 1,
-        "mem" : 50000
+        "J" : "{rule}.{wildcards}",
+        "o" : "logs/{rule}/{rule}_%j.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "c" : 4,
+        "mem" : 45000
     },
-    "compute_insert_length" :
+    "trim_bbduk" :
     {
-        "J" : "compute_insert_length",
-        "e" : "logs/compute_insert_length/{wildcards.sample}_{rule}.err",
-        "o" : "logs/compute_insert_length/{wildcards.sample}_{rule}.out",
-        "c" : 1,
-        "mem" : 10000
-    },
-    "run_miso" :
-    {
-        "J" : "run_miso",
-        "e" : "logs/run_miso/{wildcards.sample}_{rule}.err",
-        "o" : "logs/run_miso/{wildcards.sample}_{rule}.out",
-        "c" : 1,
-        "t" : "35:00:00",
-        "mem" : 40000
-    },
-    "summarize_miso" :
-    {
-        "J" : "summarize_miso",
-        "e" : "logs/summarize_miso/{wildcards.sample}_{rule}.err",
-        "o" : "logs/summarize_miso/{wildcards.sample}_{rule}.out",
-        "c" : 1,
-        "t" : "35:00:00",
-        "mem" : 10000
-    },
-    "trimming" :
-    {
-        "J" : "trimming",
-        "e" : "logs/trimming/trimming_%j_{rule}.err",
-        "o" : "logs/trimming/trimming_%j_{rule}.out",
+        "J" : "trim_bbduk",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
     "generate_qc_qa" :
     {
         "J" : "qc_qa_script_generation",
-        "e" : "logs/generate_qc_qa/generate_qc_qa_%j_{rule}.err",
-        "o" : "logs/generate_qc_qa/generate_qc_qa_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem" : 5000
     },
     "run_qc_qa" :
     {
         "J" : "run_qc_qa",
-        "e" : "logs/run_qc_qa/run_qc_qa_%j_{rule}.err",
-        "o" : "logs/run_qc_qa/run_qc_qa_%j_{rule}.out", 
-        "mem" : 45000 
-    }, 
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
+        "mem" : 45000
+    },
     "insertion_profile" :
-    { 
+    {
         "J" : "insertion_profile",
-        "e" : "logs/insertion_profile/insertion_profile_%j_{rule}.err",
-        "o" : "logs/insertion_profile/insertion_profile_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem":10000
     },
     "inner_distance" :
     {
         "J" : "inner_distance",
-        "e" : "logs/inner_distance/inner_distance_%j_{rule}.err",
-        "o" : "logs/inner_distance/inner_distance_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem":10000
     },
     "clipping_profile" :
     {
         "J" : "clipping_profile",
-        "e" : "logs/clipping_profile/clipping_profile_%j_{rule}.err",
-        "o" : "logs/clipping_profile/clipping_profile_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem":10000
     },
     "read_distribution" :
     {
         "J" : "read_distribution",
-        "e" : "logs/read_distribution/read_distribution_%j_{rule}.err",
-        "o" : "logs/read_distribution/read_distribution_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem":10000
     },
     "read_GC" :
     {
         "J" : "read_GC",
-        "e" : "logs/read_GC/read_GC_%j_{rule}.err",
-        "o" : "logs/read_GC/read_GC_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem":10000
     },
     "star_statistics" :
     {
         "J" : "star_statistics",
-        "e" : "logs/star_statistics/star_statistics_%j_{rule}.err",
-        "o" : "logs/star_statistics/star_statistics_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem":5000
     },
-    "picard" :
+    "STAR" :
     {
-        "J" : "picard",
-        "e" : "logs/picard/picard_%j_{rule}.err",
-        "o" : "logs/picard/picard_%j_{rule}.out",
+        "J" : "STAR",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
+        "c" : 12,
+        "mem" : 64000
+    },
+    "index" :
+    {
+        "J" : "index",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem" : 45000
     },
-    "STAR" :
+    "bam_statistics" :
     {
-        "J" : "star",
-        "e" : "logs/star/star%j_{rule}.err",
-        "o" : "logs/star/star%j_{rule}.out",
-        "c" : 12,
-        "mem" : 64000
+        "J" : "bam_statistics",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
+        "c" : 1,
+        "mem" : 45000
     },
-    "STAR_notrim" :
+    "get_bam_coverage" :
     {
-        "J" : "star_notrim",
-        "e" : "logs/star_notrim/star%j_{rule}.err",
-        "o" : "logs/star_notrim/star%j_{rule}.out",
-        "c" : 12,
-        "mem" : 64000
+        "J" : "get_bam_coverage",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
+        "c" : 1,
+        "mem" : 45000
     },
     "sort" :
     {
         "J" : "sort",
-        "e" : "logs/sort/sort_%j_{rule}.err",
-        "o" : "logs/sort/sort_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
     "samtools_stats" :
     {
         "J" : "samtools_stats",
-        "e" : "logs/samtools_stats/samtools_stats_%j_{rule}.err",
-        "o" : "logs/samtools_stats/samtools_stats_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
     "genecount" :
     {
         "J" : "genecount",
-        "e" : "logs/genecount/genecount_%j_{rule}.err",
-        "o" : "logs/genecount/genecount_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
     "count_exons" :
     {
         "J" : "count_exons",
-        "e" : "logs/count_exons/count_exons_%j_{rule}.err",
-        "o" : "logs/count_exons/count_exons_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem" : 54000
     },
     "compile_counts" :
     {
         "J" : "compile_counts",
-        "e" : "logs/compile_counts/compile_counts_%j_{rule}.err",
-        "o" : "logs/compile_counts/compile_counts_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem":5000
     },
     "compile_counts_and_stats" :
     {
         "J" : "compile_counts_and_stats",
-        "e" : "logs/compile_counts/compile_counts_and_stats_%j_{rule}.err",
-        "o" : "logs/compile_counts/compile_counts_and_stats_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem":5000
     },
     "compile_exon_counts" :
     {
         "J" : "compile_exon_counts",
-        "e" : "logs/compile_exon_counts/compile_exon_counts_%j_{rule}.err",
-        "o" : "logs/compile_exon_counts/compile_exon_counts_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem":5000
     },
     "deseq2_init" :
     {
         "J" : "deseq2_init",
-        "e" : "logs/deseq2/deseq2_init_%j_{rule}.err",
-        "o" : "logs/deseq2/deseq2_init_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 20,
         "mem" : 80000
     },
     "deseq2_plots" :
     {
         "J" : "deseq2_plots",
-        "e" : "logs/deseq2/deseq2_plots_%j_{rule}.err",
-        "o" : "logs/deseq2/deseq2_plots_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "mem" : 30000
     },
     "deseq2" :
     {
         "J" : "deseq2",
-        "e" : "logs/deseq2/deseq2_%j_{rule}.err",
-        "o" : "logs/deseq2/deseq2_%j_{rule}.out",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 20,
         "mem":80000
     },
     "fastqc" :
     {
         "J" : "fastqc",
-        "e" : "logs/fastqc/fastqc_%j_{rule}.err",
-        "o" : "logs/fastqc/fastqc_%j_{rule}.out",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
         "c" : 6,
         "mem":40000
     },
-    "circ_star" :
+    "fastqscreen" :
     {
-        "J" : "circ_star",
-        "e" : "logs/circ_star/circ_star%j_{rule}.err",
-        "o" : "logs/circ_star/circ_star_%j_{rule}.out",
+        "J" : "fastqscreen",
+        "e" : "logs/{rule}/{wildcards.sample}_%j.err",
+        "o" : "logs/{rule}/{wildcards.sample}_%j.out",
+        "c" : 6,
+        "mem":40000
+    },
+    "GO" :
+    {
+        "J" : "GO",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 12,
         "mem" : 64000
     },
-    "bwa" :
+    "volcano" :
     {
-        "J" : "bwa",
-        "e" : "logs/bwa/bwa%j_{rule}.err",
-        "o" : "logs/bwa/bwa%j_{rule}.out",
-        "c" : 12,
-        "mem" : 64000
-    },
-    "ciri" :
-    {
-        "J" : "ciri",
-        "e" : "logs/ciri/ciri%j_{rule}.err",
-        "o" : "logs/ciri/ciri%j_{rule}.out",
-        "c" : 12,
-        "mem" : 64000
-    },
-    "ciri_junction_counts" :
-    {
-        "J" : "ciri_junction_counts",
-        "e" : "logs/ciri_junction_counts/ciri_junction_counts%j_{rule}.err",
-        "o" : "logs/ciri_junction_counts/ciri_junction_counts%j_{rule}.out",
+        "J" : "volcano",
+        "e" : "logs/{rule}/{rule}_%j.err",
+        "o" : "logs/{rule}/{rule}_%j.out",
         "c" : 1,
         "mem" : 5400
     }
