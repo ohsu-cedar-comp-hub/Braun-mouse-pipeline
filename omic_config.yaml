@@ -1,14 +1,14 @@
 bb_adapter:
-  /home/exacloud/lustre1/CompBio/estabroj/data/snakemake/projects/beta4/data/adapters.fa
+  /data/adapters.fa
 
 bed_file:
-  /home/groups/CEDAR/estabroj/beta4/data/mm10_MGC_gene.bed
+  /data/mm10_MGC_gene.bed
 
 star_tool:
   /home/groups/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
 
 adapter-PE:
-  /home/users/estabroj/scratch/data/snakemake/projects/beta4/data/TruSeq3-PE-2.fa
+  /data/TruSeq3-PE-2.fa
 
 conf:
   /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
@@ -20,10 +20,10 @@ star_index:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
 
 project_id:
-  test_run  
+  project_id
 
 base_dir:
-  /home/users/estabroj/cedar_rds/experiments/Braun-mouse-pipeline
+  base_dir
 
 omic_meta_data:
   #Path to metadata file

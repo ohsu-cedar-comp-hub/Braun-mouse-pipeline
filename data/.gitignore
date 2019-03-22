@@ -1,4 +1,7 @@
 gnore everything in this directory
 *
 # Except this file
+!mm10_MGC_gene.bed
+!adapters.fa
+!TruSeq3-PE-2.fa
 !.gitignore
