@@ -1,14 +1,14 @@
 bb_adapter:
-  /data/adapters.fa
+  ./data/adapters.fa
 
 bed_file:
-  /data/mm10_MGC_gene.bed
+  ./data/mm10_MGC_gene.bed
 
 star_tool:
   /home/groups/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
 
 adapter-PE:
-  /data/TruSeq3-PE-2.fa
+  ./data/TruSeq3-PE-2.fa
 
 conf:
   /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
