@@ -52,13 +52,16 @@ rule deseq2:
         "../scripts/deseq2.R"
 
 
-
 rule GO:
     input:
         "results/diffexp/{contrast}.diffexp.tsv"
     output:
-        "results/diffexp/GOterms/{contrast}.diffexp.downFC.1.adjp.0.05_BP_GO.txt",
-        "results/diffexp/GOterms/{contrast}.diffexp.upFC.1.adjp.0.05_BP_GO.txt",
+        "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_GO.txt",
+        "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_GO.txt",
+        "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01.BP.pdf",
+        "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01.BP.pdf",
+        "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_classic_5_all.pdf",
+        "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_classic_5_all.pdf"
     params:
         contrast = get_contrast,
         assembly = config["assembly"],
