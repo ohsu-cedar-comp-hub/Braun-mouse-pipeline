@@ -13,9 +13,6 @@ adapter-PE:
 conf:
   /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
 
-refflat2:
-  /home/exacloud/lustre1/CEDAR/Genomes/gencode27_refflat2.txt
-
 star_index:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Sequence/Star2Index
 

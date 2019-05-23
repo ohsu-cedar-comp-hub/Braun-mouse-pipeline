@@ -5,9 +5,14 @@
 # GTF file for the genome build you would like to use
 gtf_file:
   /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/resources/chr19.gtf
+
 # Bed file for rseqc function read_distribution
 bed_file:
   /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/resources/chr19.bed
+
+bb_adapter:
+  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/data/adapters.fa
+
 # Pre-built star indexes for hg38
 star_index:
   resources/
@@ -17,7 +22,7 @@ star_index:
 ####################################################################
 
 # Fasta file including the illumina adapters to be trimmed out via Trimmomatic
-adapter:
+adapter-PE:
   resources/TruSeq2-SE.fa
 # Pre-built genome indexes for various organisms which we will screen against to look for contamination
 conf:
