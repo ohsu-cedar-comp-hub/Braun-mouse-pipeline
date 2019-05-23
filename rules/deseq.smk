@@ -154,7 +154,7 @@ rule volcano:
 
 rule permutation:
     input:
-        counts = "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
+        counts = "data/{project_id}_counts.txt".format(project_id = project_id)
     output:
         numGenes = "results/diffexp/pairwise/permutationTest/{contrast}.number.diff.genes.csv",
         permList = "results/diffexp/pairwise/permutationTest/{contrast}.permutation.list.csv",
