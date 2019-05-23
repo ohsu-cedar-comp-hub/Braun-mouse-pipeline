@@ -1,4 +1,4 @@
-rule trim_bbduk:    
+rule trim_bbduk:
     input:
         fwd = "samples/raw/{sample}_R1.fastq.gz",
         rev = "samples/raw/{sample}_R2.fastq.gz"
@@ -7,13 +7,12 @@ rule trim_bbduk:
         rev = "samples/bbduk/{sample}/{sample}_R2_t.fastq.gz",
     params:
         ref=config["bb_adapter"]
-    conda:
-        "../envs/bbmap.yaml"
     message:
         """--- Trimming."""
+    conda:
+        "../envs/bbmap.yaml"
     shell:
         """bbduk.sh -Xmx1g in1={input.fwd} in2={input.rev} out1={output.fwd} out2={output.rev} minlen=25 qtrim=rl trimq=10 ktrim=r k=25 mink=11 ref={params.ref} hdist=1"""
-
 
 rule afterqc_filter:
     input:
@@ -34,7 +33,6 @@ rule afterqc_filter:
     shell:
         """after.py -1 {input.fwd} -2 {input.rev} --report_output_folder=samples/bbduk/{wildcards.sample}/QC/ -g samples/bbduk/{wildcards.sample}/good/ -b samples/bbduk/{wildcards.sample}/bad/"""
 
-
 rule fastqscreen:
     input:
         fwd = "samples/bbduk/{sample}/good/{sample}_R1_t.good.fq.gz",
@@ -53,6 +51,7 @@ rule fastqscreen:
     shell:
         """fastq_screen --aligner bowtie2 --conf {params.conf} --outdir samples/fastqscreen/{wildcards.sample} {input.fwd} {input.rev}"""
 
+
 rule fastqc:
     input:
         fwd = "samples/bbduk/{sample}/good/{sample}_R1_t.good.fq.gz",
@@ -67,13 +66,12 @@ rule fastqc:
     shell:
         """fastqc --outdir samples/fastqc/{wildcards.sample} --extract  -f fastq {input.fwd} {input.rev}"""
 
-
 rule STAR:
     input:
         fwd = "samples/bbduk/{sample}/good/{sample}_R1_t.good.fq.gz",
         rev = "samples/bbduk/{sample}/good/{sample}_R2_t.good.fq.gz"
     output:
-        temp("samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"),
+        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam",
         "samples/star/{sample}_bam/ReadsPerGene.out.tab",
         "samples/star/{sample}_bam/Log.final.out"
     threads: 12
@@ -94,17 +92,15 @@ rule STAR:
                 --twopassMode Basic
                 """)
 
-
-rule samtools_index:
+rule index:
     input:
-        "samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam",
+        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
     output:
-        "samples/star_notrim/{sample}_bam/Aligned.sortedByCoord.out.bam.bai",
+        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam.bai"
     conda:
         "../envs/omic_qc_wf.yaml"
     shell:
-        "samtools index {input} {output}"
-
+        """samtools index {input} {output}"""
 
 rule star_statistics:
     input:
@@ -115,22 +111,12 @@ rule star_statistics:
         "../scripts/compile_star_log.py"
 
 
-rule samtools_stats:
-    input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    output:
-        "samples/samtools_stats/{sample}.txt"
-    conda:
-        "../envs/omic_qc_wf.yaml"
-    wrapper:
-        "0.17.0/bio/samtools/stats"
-
-
 rule compile_star_counts:
     input:
         expand("samples/star/{sample}_bam/ReadsPerGene.out.tab",sample=SAMPLES)
+    params:
+        samples=SAMPLES
     output:
         "data/{project_id}_counts.txt".format(project_id=config["project_id"])
     script:
         "../scripts/compile_star_counts.py"
-
