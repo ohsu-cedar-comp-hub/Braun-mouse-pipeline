@@ -65,6 +65,11 @@ FC:
 #FDR adjusted p-value cutoff for GO analysis
 adjp:
   0.01
+
+seq_layout:
+  # type of data paired-end | single-end : PE | SE
+  PE
+
 baseline:
   WT
 # The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
