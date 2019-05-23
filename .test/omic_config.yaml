@@ -4,14 +4,14 @@
 
 # GTF file for the genome build you would like to use
 gtf_file:
-  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/resources/chr19.gtf
+  /home/travis/build/ohsu-cedar-comp-hub/Mouse-Bulk-RNA-seq-pipeline-PE/.test/resources/chr19.gtf
 
 # Bed file for rseqc function read_distribution
 bed_file:
-  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/resources/chr19.bed
+  /home/travis/build/ohsu-cedar-comp-hub/Mouse-Bulk-RNA-seq-pipeline-PE/.test/resources/chr19.bed
 
 bb_adapter:
-  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/data/adapters.fa
+  /home/travis/build/ohsu-cedar-comp-hub/Mouse-Bulk-RNA-seq-pipeline-PE/.test/data/adapters.fa
 
 # Pre-built star indexes for hg38
 star_index:
@@ -37,10 +37,10 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test/data/metadata.txt
+  /home/travis/build/ohsu-cedar-comp-hub/Mouse-Bulk-RNA-seq-pipeline-PE/.test/data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /home/travis/build/ohsu-cedar-comp-hub/Braun-mouse-pipeline/.test
+  /home/travis/build/ohsu-cedar-comp-hub/Mouse-Bulk-RNA-seq-pipeline-PE/.test
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
