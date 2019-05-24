@@ -73,7 +73,7 @@ rownames(md) <- md[[sampleID]]
 md[[sampleID]] <- NULL
 
 # Ensure that we subset md to have exactly the same samples as in the counts table
-md <- md[colnames(cts),]
+md <- md[colnames(cts),,drop=FALSE]
 dim(md)
 
 # Check
@@ -175,7 +175,7 @@ group <- as.vector(group)
 if (length(group)>0) {
   md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)
   md <- md[order(md[sampleID]),]
-  cts <- read.table(counts, header=TRUE, row.names=1, sep="\t")
+  cts <- read.table(counts, header=TRUE, row.names=1, sep="\t", check.names=F)
   cts <- cts[,order(colnames(cts))]
   md <- md[md[[Type]] %in% group,]
   rownames(md) <- md[[sampleID]]
@@ -183,7 +183,7 @@ if (length(group)>0) {
   keep <- colnames(cts)[colnames(cts) %in% rownames(md)]
   cts <- cts[, keep]
   dim(cts)
-  md <- md[colnames(cts),]
+  md <- md[colnames(cts),,drop=FALSE]
   dim(md)
 
   dds <- DESeqDataSetFromMatrix(countData=cts,
