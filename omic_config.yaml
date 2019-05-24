@@ -74,6 +74,9 @@ diffexp:
       - GSK
       # factor level of baseline of control group
       - ND
+  LRT:
+    - T618I
+    - Empty
 
 colors:
   rcolorbrewer:
