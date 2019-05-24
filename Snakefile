@@ -33,7 +33,6 @@ with open('cluster.json') as json_file:
     json_dict = json.load(json_file)
 
 rule_dirs = list(json_dict.keys())
-rule_dirs.pop(rule_dirs.index('__default__'))
 
 
 for rule in rule_dirs:
