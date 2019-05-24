@@ -49,6 +49,10 @@ sample_id:
 assembly:
   mm10
 
+#option to print GOterm tree (0/1)
+printTree:
+  1
+
 #fold change cutoff (not log2 transformed) for GO analysis
 FC:
   2
@@ -75,8 +79,8 @@ diffexp:
       # factor level of baseline of control group
       - ND
   LRT:
-    - T618I
-    - Empty
+    - GSK
+    - ND
 
 colors:
   rcolorbrewer:
