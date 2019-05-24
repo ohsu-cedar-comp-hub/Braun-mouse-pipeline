@@ -85,8 +85,9 @@ meta_columns_to_plot:
 # Contrasts which you would like to run differential expression on.
 # For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
 # It is important that when listing your types here, you write your baseline SECOND
-diffexp:
   # contrasts for the deseq2 results method
+
+diffexp:
   contrasts:
     Empty-vs-T618I:
       - T618I

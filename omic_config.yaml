@@ -49,6 +49,13 @@ sample_id:
 assembly:
   mm10
 
+#fold change cutoff (not log2 transformed) for GO analysis
+FC:
+  2
+#FDR adjusted p-value cutoff for GO analysis
+adjp:
+  0.01
+
 meta_columns_to_plot:
   Condition: Condition
 
@@ -67,3 +74,9 @@ diffexp:
       - GSK
       # factor level of baseline of control group
       - ND
+
+colors:
+  rcolorbrewer:
+    - NA
+  discrete:
+    - NA
