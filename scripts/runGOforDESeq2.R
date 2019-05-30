@@ -122,7 +122,6 @@ drawBarplot <- function(go, ontology, setName){
 print("get up genes and make geneList")
 up <- deg$padj < adjp & deg$log2FoldChange >= log2(FC)
 up <- unique(rownames(deg[up,]))
-up <- toupper(up)
 all <-unique(names(geneID2GO))
 up.geneList <-  factor(as.integer(all %in% up))
 names(up.geneList) <- all
@@ -154,7 +153,6 @@ write.table('No Significant Genes', file=up_out)
 print("get down genes and make geneList")
 dn <- deg$padj < adjp & deg$log2FoldChange <= -log2(FC)
 dn <- unique(rownames(deg[dn,]))
-dn <- toupper(dn)
 all <-unique(names(geneID2GO))
 dn.geneList <-  factor(as.integer(all %in% dn))
 names(dn.geneList) <- all

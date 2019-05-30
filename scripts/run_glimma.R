@@ -33,7 +33,7 @@ status_frame$padj[is.na(status_frame$padj)] = 1
 status_frame[status_frame$padj<0.05 & status_frame$log2FoldChange < 0 ,'status'] = -1
 status_frame[status_frame$padj<0.05 & status_frame$log2FoldChange > 0 ,'status'] = 1
 
-title = paste(title[2],'vs',title[1],sep='-')
+title = paste(title[1],'vs',title[2],sep='-')
 
 glMDPlot(res, anno=genes, status=status_frame$status, samples=colnames(rnaseq), 
          counts=log2(rnaseq + 0.0001), groups=groups.df[[condition]], main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], 
