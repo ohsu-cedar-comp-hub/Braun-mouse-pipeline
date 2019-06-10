@@ -16,6 +16,6 @@ channels:
   - https://repo.anaconda.com/pkgs/pro/linux-64
   - https://repo.anaconda.com/pkgs/pro/noarch
 dependencies:
-  - bbmap=38.22=h14c3975_1
-  - libgcc-ng=7.3.0=hdf63c60_0
-  - openjdk=11.0.1=h14c3975_1014
+  - bbmap=38.22
+  - libgcc-ng=7.3.0
+  - openjdk=11.0.1
