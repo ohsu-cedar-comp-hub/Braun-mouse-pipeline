@@ -6,6 +6,7 @@ condition = snakemake@params[['condition']]
 cat(sprintf(c('Condition: ',condition,'\n')))
 
 title = snakemake@params[["contrast"]]
+cat(sprintf(c('title object: ',title,'\n')))
 
 contrast = c(condition, snakemake@params[["contrast"]])
 rds = snakemake@input[['rds']]
@@ -34,6 +35,8 @@ status_frame[status_frame$padj<0.05 & status_frame$log2FoldChange < 0 ,'status']
 status_frame[status_frame$padj<0.05 & status_frame$log2FoldChange > 0 ,'status'] = 1
 
 title = paste(title[1],'vs',title[2],sep='-')
+cat(sprintf(c('title object: ',title,'\n')))
+
 
 glMDPlot(res, anno=genes, status=status_frame$status, samples=colnames(rnaseq), 
          counts=log2(rnaseq + 0.0001), groups=groups.df[[condition]], main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], 
