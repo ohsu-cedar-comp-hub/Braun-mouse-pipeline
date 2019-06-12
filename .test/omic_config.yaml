@@ -89,7 +89,7 @@ meta_columns_to_plot:
 
 diffexp:
   contrasts:
-    Empty-vs-T618I:
+    T618I-vs-Empty:
       - T618I
       - Empty
   LRT:
