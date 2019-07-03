@@ -19,6 +19,9 @@ output = snakemake@output[['rds']]
 
 rld_out = snakemake@output[['rld_out']]
 
+counts_out = snakemake@output[['counts_out']]
+
+
 parallel <- FALSE
 if (snakemake@threads > 1) {
     library("BiocParallel")
@@ -70,6 +73,11 @@ dds <- dds[ rowSums(counts(dds)) > 1, ]
 dds <- DESeq(dds, parallel=parallel)
 saveRDS(dds, file=output)
 
+normalized_counts <- counts(dds, normalized=TRUE)
+write.table(normalized_counts, file=counts_out, sep="\t", quote=F)
+
 # obtain normalized counts
 rld <- rlog(dds, blind=FALSE)
 saveRDS(rld, file=rld_out)
+
+

@@ -5,7 +5,8 @@ rule deseq2_init:
         counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
     output:
         rds="results/diffexp/pairwise/{contrast}_all.rds",
-        rld_out = "results/diffexp/pairwise/{contrast}_rlog_dds.rds"
+        rld_out = "results/diffexp/pairwise/{contrast}_rlog_dds.rds",
+        counts_out = "results/diffexp/pairwise/{project_id}_normalized_counts.txt"
     params:
         samples=config["omic_meta_data"],
         sample_id = config["sample_id"],

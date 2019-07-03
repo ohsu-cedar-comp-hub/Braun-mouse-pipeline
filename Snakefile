@@ -84,6 +84,7 @@ rule all:
         expand("rseqc/read_distribution/{sample}/{sample}.read_distribution.{ext}", sample = SAMPLES, ext = read_dist_ext),
         expand("rseqc/read_GC/{sample}/{sample}.GC{ext}", sample = SAMPLES, ext = read_gc_ext),
         expand("results/diffexp/pairwise/{contrast}.pca_plot.pdf", contrast = config["diffexp"]["contrasts"]),
+        "results/diffexp/pairwise/{project_id}_normalized_counts.txt".format(project_id=project_id),
         "results/diffexp/group/LRT_pca.pdf",
         "results/diffexp/group/MDS_table.txt",
         "results/diffexp/group/LRT_density_plot.pdf",
