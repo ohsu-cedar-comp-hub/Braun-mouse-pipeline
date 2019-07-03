@@ -6,7 +6,6 @@ rule deseq2_init:
     output:
         rds="results/diffexp/pairwise/{contrast}_all.rds",
         rld_out = "results/diffexp/pairwise/{contrast}_rlog_dds.rds",
-        counts_out = "results/diffexp/pairwise/{project_id}_normalized_counts.txt"
     params:
         samples=config["omic_meta_data"],
         sample_id = config["sample_id"],
