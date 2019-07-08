@@ -1,5 +1,21 @@
 contrast = get_contrast
 
+rule deseq2_normed_counts:
+    input:
+        counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+    output:
+        counts_out = "results/tables/{project_id}_normalized_counts.txt",
+    params:
+        samples=config["omic_meta_data"],
+        sample_id = config["sample_id"],
+        linear_model = config["linear_model"],
+    conda:
+        "../envs/permutation.yaml"
+    threads: get_deseq2_threads()
+    script:
+        "../scripts/deseq2_normed_counts.R"
+
+
 rule deseq2_init:
     input:
         counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
