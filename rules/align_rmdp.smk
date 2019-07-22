@@ -98,7 +98,7 @@ rule index:
     output:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam.bai"
     conda:
-        "../envs/omic_qc_wf.yaml"
+        "../envs/samtools_env.yaml"
     shell:
         """samtools index {input} {output}"""
 
