@@ -5,9 +5,7 @@ counts = snakemake@input[['counts']]
 
 metadata <- snakemake@params[['samples']]
 sampleID <- snakemake@params[['sample_id']]
-
 Type <- snakemake@params[['linear_model']]
-
 counts_out = snakemake@output[['counts_out']]
 
 
@@ -25,12 +23,18 @@ md <- md[order(md[sampleID]),]
 rownames(md) <- md[[sampleID]]
 md[[sampleID]] <- NULL
 
+
 # Read in counts table
 subdata <- read.table(counts, header=TRUE, row.names=1, sep="\t", check.names=FALSE)
 subdata <- subdata[,order(colnames(subdata))]
 
 
+md <- md[colnames(subdata),,drop=FALSE]
 # Check
+
+print(md)
+print(subdata)
+
 stopifnot(rownames(md)==colnames(subdata))
 
 # Obtain the number of genes that meet padj<0.01 for reference line in histogram
