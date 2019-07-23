@@ -31,7 +31,7 @@ gtf_file:
   /home/groups/CEDAR/estabroj/indexes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2015-07-17-14-33-26/Genes/genes.gtf
 
 seq_layout:
-  # type of data paired-end | single-end : PE | SE
+  # type of data paired-end PE
   PE
 
 baseline:
